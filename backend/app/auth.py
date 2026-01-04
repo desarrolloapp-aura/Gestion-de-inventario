@@ -17,20 +17,29 @@ def verify_password(plain_password: str, hashed_password: str) -> bool:
     try:
         # Validar entradas
         if not plain_password or not isinstance(plain_password, str):
+            print(f"[VERIFY PASSWORD] Contraseña inválida: {type(plain_password)}")
             return False
         if not hashed_password or not isinstance(hashed_password, str):
+            print(f"[VERIFY PASSWORD] Hash inválido: {type(hashed_password)}")
             return False
         
         # Convertir a bytes
         password_bytes = plain_password.encode('utf-8')
         hash_bytes = hashed_password.encode('utf-8')
         
+        print(f"[VERIFY PASSWORD] Longitud password_bytes: {len(password_bytes)}")
+        print(f"[VERIFY PASSWORD] Longitud hash_bytes: {len(hash_bytes)}")
+        print(f"[VERIFY PASSWORD] Hash preview: {hashed_password[:30]}...")
+        
         # Bcrypt tiene un límite de 72 bytes, truncar si es necesario
         if len(password_bytes) > 72:
             password_bytes = password_bytes[:72]
+            print(f"[VERIFY PASSWORD] Password truncado a 72 bytes")
         
         # Verificar contraseña usando bcrypt directamente
-        return bcrypt.checkpw(password_bytes, hash_bytes)
+        result = bcrypt.checkpw(password_bytes, hash_bytes)
+        print(f"[VERIFY PASSWORD] Resultado de checkpw: {result}")
+        return result
     except ValueError as e:
         # Error específico de bcrypt sobre longitud
         if "cannot be longer than 72 bytes" in str(e):
