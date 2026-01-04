@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { useMutation, useQueryClient, useQuery } from '@tanstack/react-query'
 import { trabajadoresService } from '../../services/trabajadores'
 import { configService } from '../../services/config'
-import { useToast } from '../../context/ToastContext'
 
 interface Props {
   onClose: () => void

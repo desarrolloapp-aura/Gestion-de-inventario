@@ -380,7 +380,6 @@ export default function DashboardStats() {
                   {datosParaRegresion.map((d, i) => {
                     const x = escalaX(d.dia)
                     const y = escalaY(d.cantidad)
-                    const yPredicho = pendiente * d.dia + intercepto
                     
                     return (
                       <g key={`point-${i}`}>
@@ -600,7 +599,7 @@ export default function DashboardStats() {
                           className="transition-all duration-300 hover:opacity-80"
                           style={{ filter: 'drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3))' }}
                         />
-                        {seg.porcentaje > 5 && (
+                        {parseFloat(seg.porcentaje) > 5 && (
                           <text
                             x={seg.xTexto}
                             y={seg.yTexto}
