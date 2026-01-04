@@ -22,8 +22,7 @@ export default {
       package: "com.aura.mobile",
       permissions: [
         "CAMERA"
-      ],
-      versionCode: 1
+      ]
     },
     web: {
     },
