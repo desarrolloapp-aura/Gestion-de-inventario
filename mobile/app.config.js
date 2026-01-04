@@ -17,7 +17,7 @@ export default {
     },
     android: {
       adaptiveIcon: {
-        foregroundImage: "./assets/icon.png", // Icono de la app (1024x1024 px)
+        // foregroundImage: "./assets/icon.png", // Descomentar cuando tengas el icono (1024x1024 px)
         backgroundColor: "#111827"
       },
       package: "com.aura.mobile",
@@ -25,7 +25,7 @@ export default {
         "CAMERA"
       ]
     },
-    icon: "./assets/icon.png", // Icono general de la app (1024x1024 px)
+    // icon: "./assets/icon.png", // Descomentar cuando tengas el icono (1024x1024 px)
     web: {
     },
     plugins: [
