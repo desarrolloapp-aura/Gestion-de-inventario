@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useMutation, useQueryClient, useQuery } from '@tanstack/react-query'
 import { prestamosService } from '../../services/prestamos'
 import { trabajadoresService } from '../../services/trabajadores'

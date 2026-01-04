@@ -60,10 +60,6 @@ export default function GestionarEquiposView() {
     }
   }
 
-  const handleDevolver = (equipoId: number) => {
-    setEquipoSeleccionado(equipoId)
-    setShowDevolverModal(true)
-  }
 
   return (
     <div className="p-6">

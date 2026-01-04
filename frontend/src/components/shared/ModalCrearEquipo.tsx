@@ -10,6 +10,7 @@ interface Props {
 }
 
 export default function ModalCrearEquipo({ onClose }: Props) {
+  const { showToast } = useToast()
   const [formData, setFormData] = useState({
     serie: '',
     marca: '',

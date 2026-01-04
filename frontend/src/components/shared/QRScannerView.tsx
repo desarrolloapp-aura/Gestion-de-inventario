@@ -2,27 +2,16 @@ import { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { equiposService } from '../../services/equipos'
 import { useAuth } from '../../context/AuthContext'
-import ModalPrestar from './ModalPrestar'
-import ModalDevolver from './ModalDevolver'
 import { useToast } from '../../context/ToastContext'
 import PrestamoMovilView from './PrestamoMovilView'
 
 export default function QRScannerView() {
   const { equipoId } = useParams<{ equipoId: string }>()
   const navigate = useNavigate()
-  const { user, isAuthenticated } = useAuth()
+  const { isAuthenticated } = useAuth()
   const { showToast } = useToast()
   const [loading, setLoading] = useState(true)
   const [equipoInfo, setEquipoInfo] = useState<any>(null)
-  const [showPrestarModal, setShowPrestarModal] = useState(false)
-  const [showDevolverModal, setShowDevolverModal] = useState(false)
-  const [isMobile, setIsMobile] = useState(false)
-  
-  // Detectar si es móvil - SIEMPRE mostrar vista móvil cuando se accede desde QR
-  useEffect(() => {
-    // Si estamos en la ruta /qr/equipo, SIEMPRE usar vista móvil (sin menús)
-    setIsMobile(true)
-  }, [])
 
   useEffect(() => {
     if (!isAuthenticated) {

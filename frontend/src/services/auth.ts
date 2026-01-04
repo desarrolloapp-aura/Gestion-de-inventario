@@ -12,13 +12,9 @@ export interface TokenResponse {
   obra?: string
 }
 
-export interface User {
-  id: number
-  username: string
-  email: string
-  rol: string
-  obra?: string
-}
+import { User } from '../types'
+
+export type { User }
 
 export const authService = {
   login: async (credentials: LoginCredentials) => {

@@ -56,11 +56,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         console.error('Error al obtener datos del usuario, usando datos del login:', getMeError)
         // Si getMe falla, usar los datos que vienen en la respuesta del login
         // Necesitamos construir un objeto User básico
-        const fallbackUser = {
+        const fallbackUser: User = {
           id: 0, // Se actualizará cuando getMe funcione
           username: username,
           email: '', // Se actualizará cuando getMe funcione
-          rol: response.rol as any,
+          rol: response.rol as RolUsuario,
           obra: response.obra || undefined
         }
         setUser(fallbackUser)

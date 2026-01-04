@@ -11,6 +11,7 @@ interface Props {
 }
 
 export default function ModalEditarEquipo({ equipoId, onClose }: Props) {
+  const { showToast } = useToast()
   const { data: equipo, isLoading } = useQuery({
     queryKey: ['equipo', equipoId],
     queryFn: () => equiposService.getById(equipoId),

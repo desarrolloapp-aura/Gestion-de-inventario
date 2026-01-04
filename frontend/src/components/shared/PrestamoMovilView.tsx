@@ -13,7 +13,7 @@ interface Props {
   onClose: () => void
 }
 
-export default function PrestamoMovilView({ equipoId, equipoInfo, isPrestado, onClose }: Props) {
+export default function PrestamoMovilView({ equipoId, equipoInfo, isPrestado }: Props) {
   const [trabajadorSeleccionado, setTrabajadorSeleccionado] = useState<string>('')
   const [error, setError] = useState<string>('')
   const [estadoBueno, setEstadoBueno] = useState<boolean>(true)

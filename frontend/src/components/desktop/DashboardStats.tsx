@@ -381,7 +381,6 @@ export default function DashboardStats() {
                     const x = escalaX(d.dia)
                     const y = escalaY(d.cantidad)
                     const yPredicho = pendiente * d.dia + intercepto
-                    const yPredichoEscalado = escalaY(yPredicho)
                     
                     return (
                       <g key={`point-${i}`}>
@@ -530,9 +529,19 @@ export default function DashboardStats() {
               const radio = 100
               
               let anguloInicio = -90 // Empezar desde arriba
-              const segmentos = []
+              interface Segmento {
+                pathData: string
+                color: string
+                nombre: string
+                cantidad: number
+                porcentaje: string
+                xTexto: number
+                yTexto: number
+                anguloMedio: number
+              }
+              const segmentos: Segmento[] = []
               
-              datos.forEach((item, index) => {
+              datos.forEach((item) => {
                 const porcentaje = (item.cantidad / total) * 100
                 const angulo = (porcentaje / 100) * 360
                 const anguloFin = anguloInicio + angulo

@@ -72,7 +72,7 @@ export default function ModalEquiposPrestados({ trabajador, onClose }: Props) {
       // Retornar contexto con el snapshot para rollback en caso de error
       return { previousPrestamos }
     },
-    onError: (err, prestamoId, context) => {
+    onError: (_err, _prestamoId, context) => {
       // En caso de error, revertir a los datos anteriores
       if (context?.previousPrestamos) {
         queryClient.setQueryData(['prestamos', trabajador.rut], context.previousPrestamos)

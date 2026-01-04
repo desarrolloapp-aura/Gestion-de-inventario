@@ -17,7 +17,6 @@ export default function ModalCrearTrabajador({ onClose }: Props) {
     email: '',
   })
   const [error, setError] = useState<string>('')
-  const { showToast } = useToast()
   const queryClient = useQueryClient()
 
   // Obtener obras dinámicamente

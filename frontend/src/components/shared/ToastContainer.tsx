@@ -1,5 +1,4 @@
 import { useToast } from '../../context/ToastContext'
-import { useEffect } from 'react'
 
 export default function ToastContainer() {
   const { toasts, removeToast } = useToast()

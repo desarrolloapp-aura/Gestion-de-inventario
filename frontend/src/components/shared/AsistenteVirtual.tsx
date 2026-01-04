@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
-import { asistenteService, MensajeHistorial } from '../../services/asistente'
+import { asistenteService } from '../../services/asistente'
 
 interface Props {
   onClose: () => void
