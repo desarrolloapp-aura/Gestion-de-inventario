@@ -43,7 +43,10 @@ export default {
     ],
     scheme: "aura",
     extra: {
-      apiUrl: process.env.API_URL || "http://192.168.1.113:8000"
+      apiUrl: process.env.API_URL || "http://192.168.1.113:8000",
+      eas: {
+        projectId: "6cfe36ce-1b8e-4173-afdd-9b703f8d2879"
+      }
     }
   }
 };
