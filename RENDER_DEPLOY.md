@@ -1,35 +1,12 @@
 
-
----
-
-## 📋 Paso 2: Deploy Backend
-
-### Opción A: Usando render.yaml (Recomendado)
-
-1. En Render, ve a **Dashboard** → **"+ New"** → **"Blueprint"**
-2. Conecta tu repositorio de GitHub: `cuevasn050/Gestion-de-inventario`
-3. Render detectará automáticamente el archivo `render.yaml`
-4. Click **"Apply"**
-5. Render creará todos los servicios automáticamente
-
-### Opción B: Manual
-
-1. En Render, ve a **Dashboard** → **"+ New"** → **"Web Service"**
-2. Conecta tu repositorio de GitHub: `cuevasn050/Gestion-de-inventario`
-3. Configura:
-   - **Name:** `aura-backend`
-   - **Environment:** `Python 3`
-   - **Root Directory:** `backend`
-   - **Build Command:** `pip install -r requirements.txt`
-   - **Start Command:** `uvicorn app.main:app --host 0.0.0.0 --port $PORT`
 4. En **"Environment Variables"**, agrega:
    ```
-   DATABASE_URL=<Internal Database URL de PostgreSQL>
+   DATABASE_URL=postgresql://aura_user:BeLr0hbo8oD51ELqoo8LiKeiIILWOLqm@dpg-d5dcdt6uk2gs738tfu30-a/aura_8j0l
    JWT_SECRET_KEY=tu-secret-key-super-segura
    JWT_ALGORITHM=HS256
    JWT_EXPIRATION_HOURS=24
    CORS_ORIGINS=https://aura-frontend.onrender.com
-   GEMINI_API_KEY= (opcional, déjalo vacío)
+  
    ```
 5. Click **"Create Web Service"**
 6. Render te dará una URL como: `https://aura-backend.onrender.com`
