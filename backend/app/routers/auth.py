@@ -4,6 +4,7 @@ from sqlalchemy.orm import Session
 from ..database import get_db
 from ..models import Usuario
 from ..schemas import UsuarioLogin, UsuarioCreate, Token, UsuarioResponse, ChangePasswordRequest
+from pydantic import BaseModel
 from ..auth import verify_password, get_password_hash, create_access_token, get_current_user
 from ..config import settings
 
@@ -140,4 +141,35 @@ def change_password(
     db.commit()
     
     return {"message": "Contraseña actualizada exitosamente"}
+
+
+class ResetPasswordRequest(BaseModel):
+    new_password: str
+
+@router.post("/reset-password/{username}")
+def reset_password_admin(
+    username: str,
+    password_data: ResetPasswordRequest,
+    db: Session = Depends(get_db)
+):
+    """
+    Endpoint temporal para resetear contraseña de un usuario
+    ⚠️ SOLO PARA DESARROLLO/EMERGENCIA - Remover en producción
+    """
+    user = db.query(Usuario).filter(Usuario.username == username).first()
+    if not user:
+        raise HTTPException(status_code=404, detail="Usuario no encontrado")
+    
+    # Validar nueva contraseña
+    if len(password_data.new_password) < 6:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="La contraseña debe tener al menos 6 caracteres"
+        )
+    
+    # Actualizar contraseña
+    user.password_hash = get_password_hash(password_data.new_password)
+    db.commit()
+    
+    return {"message": f"Contraseña de '{username}' actualizada exitosamente"}
 
