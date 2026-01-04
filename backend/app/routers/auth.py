@@ -156,20 +156,51 @@ def reset_password_admin(
     Endpoint temporal para resetear contraseña de un usuario
     ⚠️ SOLO PARA DESARROLLO/EMERGENCIA - Remover en producción
     """
+    try:
+        user = db.query(Usuario).filter(Usuario.username == username).first()
+        if not user:
+            raise HTTPException(status_code=404, detail="Usuario no encontrado")
+        
+        # Validar nueva contraseña
+        if len(password_data.new_password) < 6:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="La contraseña debe tener al menos 6 caracteres"
+            )
+        
+        # Actualizar contraseña
+        new_hash = get_password_hash(password_data.new_password)
+        print(f"[RESET PASSWORD] Usuario: {username}, Nuevo hash: {new_hash[:30]}...")
+        user.password_hash = new_hash
+        db.commit()
+        db.refresh(user)
+        
+        return {"message": f"Contraseña de '{username}' actualizada exitosamente", "hash_preview": new_hash[:30]}
+    except HTTPException:
+        raise
+    except Exception as e:
+        print(f"[RESET PASSWORD ERROR] {e}")
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=f"Error al resetear contraseña: {str(e)}")
+
+
+@router.get("/check-user/{username}")
+def check_user(username: str, db: Session = Depends(get_db)):
+    """
+    Endpoint de diagnóstico para verificar si un usuario existe
+    """
     user = db.query(Usuario).filter(Usuario.username == username).first()
     if not user:
-        raise HTTPException(status_code=404, detail="Usuario no encontrado")
+        return {"exists": False, "message": "Usuario no encontrado"}
     
-    # Validar nueva contraseña
-    if len(password_data.new_password) < 6:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="La contraseña debe tener al menos 6 caracteres"
-        )
-    
-    # Actualizar contraseña
-    user.password_hash = get_password_hash(password_data.new_password)
-    db.commit()
-    
-    return {"message": f"Contraseña de '{username}' actualizada exitosamente"}
+    return {
+        "exists": True,
+        "username": user.username,
+        "email": user.email,
+        "rol": user.rol.value if user.rol else None,
+        "activo": user.activo,
+        "hash_preview": user.password_hash[:30] if user.password_hash else None,
+        "hash_length": len(user.password_hash) if user.password_hash else 0
+    }
 
