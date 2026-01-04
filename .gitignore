@@ -8,6 +8,7 @@ venv/
 env/
 ENV/
 .venv
+*.pkl
 
 # Node
 node_modules/
@@ -37,8 +38,39 @@ npm-debug.log*
 # Build
 build/
 *.egg-info/
+*.apk
+*.aab
+*.ipa
 
+# Android
+*.keystore
+!debug.keystore
+android/app/debug.keystore
+android/.gradle/
+android/app/build/
+android/build/
+android/local.properties
 
+# iOS
+ios/Pods/
+ios/build/
+*.xcworkspace
+*.xcuserdata
 
+# Expo
+.expo/
+.expo-shared/
+web-build/
 
+# EAS
+.eas/
 
+# Mobile
+mobile/android/
+mobile/ios/
+mobile/.expo/
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
