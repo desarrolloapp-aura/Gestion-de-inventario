@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-gray-900 text-white;
+    font-family: system-ui, -apple-system, sans-serif;
+  }
+  
+  /* Animación de fondo para login */
+  .bg-minero-gradient {
+    background: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 50%, #0A0A0A 100%);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+  }
+  
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+}
+
+@layer components {
+  .btn-minero {
+    @apply inline-flex items-center justify-center rounded-lg font-medium px-6 py-2.5 transition-all duration-200;
+    @apply bg-minero-naranja hover:bg-minero-naranja-oscuro text-white;
+    @apply hover:scale-105 active:scale-95 shadow-lg shadow-minero-naranja/20;
+  }
+  
+  .btn-minero-rojo {
+    @apply px-6 py-4 rounded-lg font-bold text-lg transition-all duration-200;
+    @apply bg-minero-rojo hover:bg-minero-rojo-oscuro text-white;
+    @apply active:scale-95;
+  }
+  
+  .card-minero {
+    @apply bg-minero-carbono border border-minero-gris rounded-lg p-4;
+    @apply shadow-lg;
+  }
+  
+  .serie-monospace {
+    @apply text-xl font-bold tracking-wider;
+  }
+  
+  .alerta-urgente {
+    @apply bg-minero-rojo text-white p-3 rounded-lg font-bold;
+    @apply border-2 border-minero-rojo-oscuro;
+  }
+}
+
