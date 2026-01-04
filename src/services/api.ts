@@ -43,8 +43,8 @@ class ApiService {
 
     // Interceptor para manejar errores y logging
     this.api.interceptors.response.use(
-          (response) => response,
-          async (error) => {
+      (response) => response,
+      async (error) => {
             try {
               // Log de errores para debugging
               const errorInfo: any = {
@@ -83,7 +83,7 @@ class ApiService {
                 console.error('[API Error]', errorInfo);
               }
           
-          if (error?.response?.status === 401) {
+            if (error?.response?.status === 401) {
             // Solo limpiar token si NO es una petición de login
             const url = error?.config?.url;
             let isLoginRequest = false;
