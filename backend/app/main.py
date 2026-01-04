@@ -22,16 +22,19 @@ app = FastAPI(
 )
 
 # CORS - Permitir orígenes específicos
-origins = [
-    "http://localhost:5173",
-    "http://localhost:3000",
-    "http://127.0.0.1:5173",
-    "http://127.0.0.1:3000",
-]
+import os
+from .config import settings
+
+# Obtener orígenes permitidos desde variables de entorno o usar defaults
+cors_origins = os.getenv("CORS_ORIGINS", "http://localhost:5173,http://localhost:3000")
+if cors_origins:
+    origins = [origin.strip() for origin in cors_origins.split(",")]
+else:
+    origins = ["*"]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Permitir todos los orígenes en desarrollo
+    allow_origins=origins if origins != ["*"] else ["*"],  # Permitir todos en desarrollo, específicos en producción
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
