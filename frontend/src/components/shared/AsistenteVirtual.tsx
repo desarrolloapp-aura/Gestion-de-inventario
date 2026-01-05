@@ -90,7 +90,20 @@ export default function AsistenteVirtual({ onClose }: Props) {
   }
 
   return (
-    <div className="w-full h-full bg-gray-900 border border-gray-800 rounded-2xl shadow-2xl flex flex-col">
+    <div 
+      className="w-full h-full bg-gray-900 border border-gray-800 rounded-2xl shadow-2xl flex flex-col"
+      onMouseEnter={(e) => {
+        e.stopPropagation()
+      }}
+      onWheel={(e) => {
+        // Solo permitir scroll dentro del contenedor de mensajes
+        const target = e.target as HTMLElement
+        const mensajesContainer = mensajesContainerRef.current
+        if (mensajesContainer && !mensajesContainer.contains(target)) {
+          e.stopPropagation()
+        }
+      }}
+    >
       {/* Header */}
       <div className="px-6 py-4 border-b border-gray-800 bg-gradient-to-r from-blue-600/20 to-purple-600/20 flex-shrink-0">
         <div className="flex items-center justify-between">
@@ -113,7 +126,14 @@ export default function AsistenteVirtual({ onClose }: Props) {
       </div>
 
         {/* Mensajes */}
-        <div ref={mensajesContainerRef} className="flex-1 overflow-y-auto p-4 space-y-3 min-h-0">
+        <div 
+          ref={mensajesContainerRef} 
+          className="flex-1 overflow-y-auto p-4 space-y-3 min-h-0"
+          onWheel={(e) => {
+            // Prevenir que el scroll se propague a la página
+            e.stopPropagation()
+          }}
+        >
           {mensajes.map((msg, idx) => (
             <div
               key={idx}
