@@ -6,51 +6,29 @@ export default function AsistenteFloating() {
 
   return (
     <>
-      {/* Botón flotante - Se mueve con el scroll del contenido, se mantiene visible con sticky */}
-      <div 
-        className="sticky bottom-6 z-50 flex justify-end pr-6" 
-        style={{ 
-          alignSelf: 'flex-end', 
-          width: 'fit-content', 
-          marginLeft: 'auto', 
-          overflow: 'visible',
-          maxHeight: '100%',
-          pointerEvents: 'auto',
+      {/* Botón flotante - Fixed para que no genere espacio */}
+      <button
+        onClick={() => setShowAsistente(!showAsistente)}
+        className="fixed bottom-6 right-6 w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white rounded-full shadow-2xl flex items-center justify-center text-3xl transition-all duration-300 hover:scale-110 active:scale-95 border-2 border-white/20 z-50"
+        title={showAsistente ? "Cerrar Asistente Virtual" : "Abrir Asistente Virtual"}
+        style={{
           overscrollBehavior: 'none',
-          contain: 'layout style paint'
+          pointerEvents: 'auto'
         }}
         onMouseEnter={(e) => {
           e.stopPropagation()
         }}
-        onWheel={(e) => {
-          e.stopPropagation()
-        }}
       >
-        <button
-          onClick={() => setShowAsistente(!showAsistente)}
-          className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white rounded-full shadow-2xl flex items-center justify-center text-3xl transition-all duration-300 hover:scale-110 active:scale-95 border-2 border-white/20"
-          title={showAsistente ? "Cerrar Asistente Virtual" : "Abrir Asistente Virtual"}
-          onMouseEnter={(e) => {
-            e.stopPropagation()
-          }}
-        >
-          🤖
-        </button>
-      </div>
+        🤖
+      </button>
 
-      {/* Widget flotante del asistente - Aparece cuando está abierto, también se mueve con sticky */}
+      {/* Widget flotante del asistente - Fixed para que no genere espacio */}
       {showAsistente && (
         <div 
-          className="sticky bottom-24 z-50 flex justify-end pr-6" 
-          style={{ 
-            alignSelf: 'flex-end', 
-            width: 'fit-content', 
-            marginLeft: 'auto', 
-            overflow: 'visible',
-            maxHeight: '100%',
-            pointerEvents: 'auto',
+          className="fixed bottom-24 right-6 z-50"
+          style={{
             overscrollBehavior: 'none',
-            contain: 'layout style paint'
+            pointerEvents: 'auto'
           }}
           onMouseEnter={(e) => {
             e.stopPropagation()
