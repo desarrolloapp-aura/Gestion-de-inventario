@@ -187,12 +187,15 @@ export default function LoginScreen({ navigation }: any) {
               </LinearGradient>
             </TouchableOpacity>
 
-            <TouchableOpacity
-              style={styles.configButton}
-              onPress={() => setShowUrlConfig(true)}
-            >
-              <Text style={styles.configButtonText}>Configurar URL del servidor</Text>
-            </TouchableOpacity>
+            {/* Solo mostrar botón de configurar URL si no hay URL de producción configurada */}
+            {!hasProductionUrl && (
+              <TouchableOpacity
+                style={styles.configButton}
+                onPress={() => setShowUrlConfig(true)}
+              >
+                <Text style={styles.configButtonText}>Configurar URL del servidor</Text>
+              </TouchableOpacity>
+            )}
           </View>
         </View>
       </LinearGradient>
