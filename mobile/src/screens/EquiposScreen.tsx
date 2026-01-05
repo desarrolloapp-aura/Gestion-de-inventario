@@ -540,8 +540,6 @@ export default function EquiposScreen() {
           <LinearGradient
             colors={['#1a1a2e', '#16213e', '#0f3460']}
             style={[styles.modalContent, { paddingBottom: Math.max(insets.bottom, 8) + 40 }]}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 0, y: 1 }}
           >
             <View style={styles.modalHeader}>
               <Text style={styles.modalTitle}>Crear Equipo</Text>
@@ -553,7 +551,7 @@ export default function EquiposScreen() {
             <ScrollView 
               style={styles.modalForm} 
               showsVerticalScrollIndicator={false}
-              contentContainerStyle={{ paddingBottom: 20 }}
+              contentContainerStyle={{ paddingBottom: Math.max(insets.bottom, 8) + 20 }}
             >
               <View style={styles.formGroup}>
                 <Text style={styles.label}>Serie *</Text>
@@ -1522,7 +1520,7 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     paddingBottom: 40,
     maxHeight: '90%',
-    overflow: 'hidden',
+    flex: 1,
   },
   modalHeader: {
     flexDirection: 'row',
@@ -1546,6 +1544,7 @@ const styles = StyleSheet.create({
   modalForm: {
     paddingHorizontal: 20,
     paddingTop: 20,
+    flex: 1,
   },
   formGroup: {
     marginBottom: 20,
