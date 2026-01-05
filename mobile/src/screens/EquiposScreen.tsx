@@ -12,6 +12,7 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigation, useRoute, RouteProp, useFocusEffect } from '@react-navigation/native';
@@ -28,6 +29,7 @@ type EquiposScreenRouteProp = RouteProp<{ Equipos: { scannedEquipo?: Equipo; act
 
 export default function EquiposScreen() {
   const navigation = useNavigation();
+  const insets = useSafeAreaInsets();
   const route = useRoute<EquiposScreenRouteProp>();
   const { user } = useAuth();
   const [search, setSearch] = useState('');
@@ -537,7 +539,7 @@ export default function EquiposScreen() {
         >
           <LinearGradient
             colors={['#1a1a2e', '#16213e', '#0f3460']}
-            style={styles.modalContent}
+            style={[styles.modalContent, { paddingBottom: Math.max(insets.bottom, 8) + 40 }]}
           >
             <View style={styles.modalHeader}>
               <Text style={styles.modalTitle}>Crear Equipo</Text>
@@ -880,7 +882,7 @@ export default function EquiposScreen() {
         >
           <LinearGradient
             colors={['#1a1a2e', '#16213e', '#0f3460']}
-            style={styles.modalContent}
+            style={[styles.modalContent, { paddingBottom: Math.max(insets.bottom, 8) + 40 }]}
           >
             <View style={styles.modalHeader}>
               <Text style={styles.modalTitle}>Editar Equipo</Text>
@@ -1049,7 +1051,7 @@ export default function EquiposScreen() {
         >
           <LinearGradient
             colors={['#1a1a2e', '#16213e', '#0f3460']}
-            style={styles.modalContent}
+            style={[styles.modalContent, { paddingBottom: Math.max(insets.bottom, 8) + 40 }]}
           >
             <View style={styles.modalHeader}>
               <Text style={styles.modalTitle}>Prestar Equipo</Text>
@@ -1180,7 +1182,7 @@ export default function EquiposScreen() {
         >
           <LinearGradient
             colors={['#1a1a2e', '#16213e', '#0f3460']}
-            style={styles.modalContent}
+            style={[styles.modalContent, { paddingBottom: Math.max(insets.bottom, 8) + 40 }]}
           >
             <View style={styles.modalHeader}>
               <Text style={styles.modalTitle}>Devolver Equipo</Text>

@@ -12,6 +12,7 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { configService } from '../services/config';
@@ -19,6 +20,7 @@ import { useAuth } from '../context/AuthContext';
 
 export default function ObrasScreen() {
   const { user } = useAuth();
+  const insets = useSafeAreaInsets();
   const [search, setSearch] = useState('');
   const [refreshing, setRefreshing] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -182,7 +184,7 @@ export default function ObrasScreen() {
         >
           <LinearGradient
             colors={['#1a1a2e', '#16213e', '#0f3460']}
-            style={styles.modalContent}
+            style={[styles.modalContent, { paddingBottom: Math.max(insets.bottom, 8) + 40 }]}
           >
             <View style={styles.modalHeader}>
               <Text style={styles.modalTitle}>Crear Obra</Text>

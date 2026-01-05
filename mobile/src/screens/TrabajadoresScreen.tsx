@@ -12,6 +12,7 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigation } from '@react-navigation/native';
@@ -23,6 +24,7 @@ import { useAuth } from '../context/AuthContext';
 export default function TrabajadoresScreen() {
   const navigation = useNavigation();
   const { user } = useAuth();
+  const insets = useSafeAreaInsets();
   const [search, setSearch] = useState('');
   const [refreshing, setRefreshing] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -317,7 +319,7 @@ export default function TrabajadoresScreen() {
         >
           <LinearGradient
             colors={['#1a1a2e', '#16213e', '#0f3460']}
-            style={styles.modalContent}
+            style={[styles.modalContent, { paddingBottom: Math.max(insets.bottom, 8) + 40 }]}
           >
             <View style={styles.modalHeader}>
               <Text style={styles.modalTitle}>Crear Trabajador</Text>
