@@ -24,15 +24,12 @@ export default function LoginScreen({ navigation }: any) {
   const [urlLoading, setUrlLoading] = useState(false);
   const { login } = useAuth();
 
-  // Cargar URL actual al montar y mostrar modal si no hay URL configurada
+  // Cargar URL actual al montar (no mostrar modal automáticamente, la URL de producción ya está configurada)
   React.useEffect(() => {
     getApiUrlAsync().then(url => {
       setBackendUrl(url || '');
-      // Si no hay URL configurada, mostrar el modal automáticamente
-      // (solo si no es una URL de producción)
-      if (!url || url.trim() === '') {
-        setShowUrlConfig(true);
-      }
+      // NO mostrar el modal automáticamente - la URL de producción ya está configurada
+      // Solo mostrar si el usuario explícitamente quiere configurar una URL diferente
     });
   }, []);
 
@@ -62,20 +59,18 @@ export default function LoginScreen({ navigation }: any) {
   };
 
   const handleLogin = async () => {
-    // Verificar que haya URL configurada antes de intentar login
-    const currentUrl = await getApiUrlAsync();
-    if (!currentUrl || currentUrl.trim() === '') {
-      Alert.alert(
-        'URL no configurada',
-        'Por favor configura la URL del servidor antes de iniciar sesión.',
-        [{ text: 'Configurar', onPress: () => setShowUrlConfig(true) }]
-      );
-      return;
-    }
-
     if (!username || !password) {
       Alert.alert('Error', 'Por favor completa todos los campos');
       return;
+    }
+
+    // Asegurar que la URL esté configurada (debería estar automáticamente)
+    const currentUrl = await getApiUrlAsync();
+    if (!currentUrl || currentUrl.trim() === '') {
+      // Si por alguna razón no hay URL, usar la de producción
+      const productionUrl = 'https://aura-backend-u905.onrender.com';
+      await saveBackendUrl(productionUrl);
+      await apiService.updateBaseUrl();
     }
 
     setLoading(true);

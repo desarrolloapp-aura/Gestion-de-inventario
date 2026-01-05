@@ -21,7 +21,7 @@ export default function TabNavigator() {
           borderTopWidth: 1,
           borderTopColor: 'rgba(255, 255, 255, 0.1)',
           height: 65,
-          paddingBottom: Platform.OS === 'android' ? 35 : 8, // Más espacio en Android para los botones del sistema
+          paddingBottom: Platform.OS === 'android' ? 50 : 8, // Más espacio en Android para los botones del sistema
           paddingTop: 8,
           elevation: 8,
           shadowColor: '#000',
