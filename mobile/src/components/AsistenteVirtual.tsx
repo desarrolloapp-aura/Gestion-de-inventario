@@ -80,10 +80,12 @@ export default function AsistenteVirtual({ onClose }: Props) {
         texto: respuesta.respuesta,
         sugerencias: respuesta.sugerencias
       }]);
-    } catch (error) {
+    } catch (error: any) {
+      console.error('[Asistente] Error al enviar mensaje:', error);
+      const errorMessage = error?.response?.data?.detail || error?.message || 'Error desconocido';
       setMensajes(prev => [...prev, {
         tipo: 'asistente',
-        texto: 'Lo siento, hubo un error al procesar tu consulta. Por favor intenta de nuevo.'
+        texto: `Lo siento, hubo un error al procesar tu consulta: ${errorMessage}. Por favor intenta de nuevo.`
       }]);
     } finally {
       setCargando(false);
@@ -101,8 +103,16 @@ export default function AsistenteVirtual({ onClose }: Props) {
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         style={styles.modalContainer}
       >
-        <View style={styles.overlay} onTouchEnd={onClose}>
-          <View style={[styles.modalContent, { paddingBottom: Math.max(insets.bottom, 8) + 20 }]} onStartShouldSetResponder={() => true}>
+        <TouchableOpacity 
+          style={styles.overlay} 
+          activeOpacity={1}
+          onPress={onClose}
+        >
+          <TouchableOpacity 
+            style={[styles.modalContent, { paddingBottom: insets.bottom + 20 }]} 
+            activeOpacity={1}
+            onPress={(e) => e.stopPropagation()}
+          >
             {/* Header */}
             <LinearGradient
               colors={['rgba(59, 130, 246, 0.2)', 'rgba(147, 51, 234, 0.2)']}
@@ -208,8 +218,8 @@ export default function AsistenteVirtual({ onClose }: Props) {
                 </LinearGradient>
               </TouchableOpacity>
             </View>
-          </View>
-        </View>
+          </TouchableOpacity>
+        </TouchableOpacity>
       </KeyboardAvoidingView>
     </Modal>
   );
@@ -231,10 +241,12 @@ const styles = StyleSheet.create({
     borderRadius: 24,
     width: '100%',
     maxWidth: 600,
+    height: '85%',
     maxHeight: '85%',
     overflow: 'hidden',
     borderWidth: 1,
     borderColor: 'rgba(255, 255, 255, 0.1)',
+    flex: 1,
   },
   header: {
     paddingHorizontal: 24,

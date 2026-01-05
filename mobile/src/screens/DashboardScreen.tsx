@@ -385,16 +385,18 @@ export default function DashboardScreen() {
                   >
                     Día del Mes
                   </SvgText>
-                  <SvgText
-                    x="15"
-                    y="130"
-                    fill="#9CA3AF"
-                    fontSize="11"
-                    textAnchor="middle"
-                    fontWeight="600"
-                  >
-                    Cantidad de Préstamos
-                  </SvgText>
+                  <G transform={`rotate(-90 15 130)`}>
+                    <SvgText
+                      x="15"
+                      y="130"
+                      fill="#9CA3AF"
+                      fontSize="11"
+                      textAnchor="middle"
+                      fontWeight="600"
+                    >
+                      Cantidad de Préstamos
+                    </SvgText>
+                  </G>
                   
                   {/* Puntos de datos */}
                   {datosCompletos.map((d: any, i: number) => {
@@ -499,23 +501,23 @@ export default function DashboardScreen() {
                     ));
                   })()}
                 </Svg>
-                <View style={styles.pieLegend}>
-                  {dispositivosMasUsados.filter((d: any) => d.cantidad > 0).map((item: any, idx: number) => {
-                    const porcentaje = ((item.cantidad / totalDispositivos) * 100).toFixed(1);
-                    return (
-                      <View key={idx} style={styles.pieLegendItem}>
-                        <View style={[styles.pieLegendColor, { backgroundColor: item.color }]} />
-                        <Text style={styles.pieLegendText}>{item.nombre}</Text>
-                        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
-                          <Text style={styles.pieLegendValue}>{item.cantidad}</Text>
-                          <Text style={[styles.pieLegendValue, { color: '#9CA3AF', fontSize: 11 }]}>
-                            ({porcentaje}%)
-                          </Text>
-                        </View>
+              </View>
+              <View style={styles.pieLegend}>
+                {dispositivosMasUsados.filter((d: any) => d.cantidad > 0).map((item: any, idx: number) => {
+                  const porcentaje = ((item.cantidad / totalDispositivos) * 100).toFixed(1);
+                  return (
+                    <View key={idx} style={styles.pieLegendItem}>
+                      <View style={[styles.pieLegendColor, { backgroundColor: item.color }]} />
+                      <Text style={styles.pieLegendText}>{item.nombre}</Text>
+                      <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
+                        <Text style={styles.pieLegendValue}>{item.cantidad}</Text>
+                        <Text style={[styles.pieLegendValue, { color: '#9CA3AF', fontSize: 11 }]}>
+                          ({porcentaje}%)
+                        </Text>
                       </View>
-                    );
-                  })}
-                </View>
+                    </View>
+                  );
+                })}
               </View>
             </View>
           )}
@@ -913,13 +915,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   pieChartContainer: {
-    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    flexWrap: 'wrap',
+    marginBottom: 16,
   },
   pieLegend: {
-    marginLeft: 20,
+    width: '100%',
     gap: 8,
   },
   pieLegendItem: {

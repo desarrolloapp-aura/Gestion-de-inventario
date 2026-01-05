@@ -539,7 +539,7 @@ export default function EquiposScreen() {
         >
           <LinearGradient
             colors={['#1a1a2e', '#16213e', '#0f3460']}
-            style={[styles.modalContent, { paddingBottom: Math.max(insets.bottom, 8) + 40 }]}
+            style={[styles.modalContent, { paddingBottom: insets.bottom + 20 }]}
           >
             <View style={styles.modalHeader}>
               <Text style={styles.modalTitle}>Crear Equipo</Text>
@@ -882,7 +882,7 @@ export default function EquiposScreen() {
         >
           <LinearGradient
             colors={['#1a1a2e', '#16213e', '#0f3460']}
-            style={[styles.modalContent, { paddingBottom: Math.max(insets.bottom, 8) + 40 }]}
+            style={[styles.modalContent, { paddingBottom: insets.bottom + 20 }]}
           >
             <View style={styles.modalHeader}>
               <Text style={styles.modalTitle}>Editar Equipo</Text>
@@ -1051,7 +1051,7 @@ export default function EquiposScreen() {
         >
           <LinearGradient
             colors={['#1a1a2e', '#16213e', '#0f3460']}
-            style={[styles.modalContent, { paddingBottom: Math.max(insets.bottom, 8) + 40 }]}
+            style={[styles.modalContent, { paddingBottom: insets.bottom + 20 }]}
           >
             <View style={styles.modalHeader}>
               <Text style={styles.modalTitle}>Prestar Equipo</Text>
@@ -1182,7 +1182,7 @@ export default function EquiposScreen() {
         >
           <LinearGradient
             colors={['#1a1a2e', '#16213e', '#0f3460']}
-            style={[styles.modalContent, { paddingBottom: Math.max(insets.bottom, 8) + 40 }]}
+            style={[styles.modalContent, { paddingBottom: insets.bottom + 20 }]}
           >
             <View style={styles.modalHeader}>
               <Text style={styles.modalTitle}>Devolver Equipo</Text>
