@@ -28,3 +28,4 @@ Para cambiar el icono de la aplicación Android, necesitas:
 El icono se usará tanto para Android como para iOS (si generas la app para iOS).
 
 
+
