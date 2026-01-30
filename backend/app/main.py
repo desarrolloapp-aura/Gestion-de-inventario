@@ -26,7 +26,7 @@ import os
 from .config import settings
 
 # Obtener orígenes permitidos desde variables de entorno o usar defaults
-cors_origins = os.getenv("CORS_ORIGINS", "http://localhost:5173,http://localhost:3000")
+cors_origins = os.getenv("CORS_ORIGINS", "http://localhost:5173,http://localhost:3000,https://gestion-de-inventario-aeu5.onrender.com,https://aura-backend-u905.onrender.com")
 if cors_origins:
     origins = [origin.strip() for origin in cors_origins.split(",")]
 else:
